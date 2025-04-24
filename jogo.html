@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Jogo da Velha</title>
+</head>
+<body>
+  <h1>JOGO DA VELHA</h1>
+
+  <div id="menu">
+    <p style="text-align: center; font-size: 20px;">Escolha o modo de jogo:</p>
+    <div class="botao-container">
+      <button class="input modernB" onclick="iniciarJogo(false)">2 Jogadores</button>
+      <button class="input modernB" onclick="mostrarDificuldades()">Contra IA</button>
+    </div>
+
+    <!-- Botões de dificuldade - inicialmente ocultos -->
+    <div id="botoes-dificuldade" style="display: none; margin-top: 10px; text-align: center;">
+      <p style="font-size: 18px;">Escolha a dificuldade:</p>
+      <button class="input modernB" onclick="iniciarJogo(true, 'facil')">Fácil</button>
+      <button class="input modernB" onclick="iniciarJogo(true, 'dificil')">Difícil</button>
+    </div>
+  </div>
+
+  <div class="game-container" style="display: none;"></div>
+  <h1 class="vencedor"></h1>
+
+  <script src="script.js"></script>
+ 
+  </script>
+</body>
+</html>
