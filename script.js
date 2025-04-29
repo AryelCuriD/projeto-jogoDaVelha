@@ -26,24 +26,26 @@ function comecarJogo(e) {
   if (turn === "X") {
     caixa.textContent = "X";
 
-    if (!contraIA) switchPlayer();
-
-    if (verificaEstado()) return;
-
+    if (verificaEstado()) return; // Verifica vitória depois de jogar
+    
     if (contraIA) {
       bloquearCaixas();
       setTimeout(() => {
-        iaJoga(); // IA joga com base na dificuldade
+        iaJoga(); 
         desbloquearCaixas();
       }, 300);
+    } else {
+      switchPlayer(); // Só troca turno se for 2 jogadores
     }
 
-  } else if (!contraIA && turn === "O") {
+  } else if (turn === "O" && !contraIA) {
     caixa.textContent = "O";
-    switchPlayer();
-    verificaEstado();
+
+    if (verificaEstado()) return; // Verifica vitória depois de jogar
+    switchPlayer(); // Troca turno
   }
 }
+
 
 // Joga com base na dificuldade
 function iaJoga() {
@@ -154,12 +156,12 @@ function verificaEstado() {
 
     bloquearCaixas();
     setTimeout(() => window.location.reload(), 5000);
-    return true;
+    return true; // termina aqui se venceu
   }
 
-  switchPlayer();
-  return false;
+  return false; // não troca turno aqui
 }
+
 
 function getCaixas() {
   const conteudo = [];
