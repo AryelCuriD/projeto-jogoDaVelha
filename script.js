@@ -7,6 +7,7 @@ function iniciarJogo(usandoIA, dificuldade = "dificil") {
   contraIA = usandoIA;
   dificuldadeIA = dificuldade;
   document.getElementById("menu").style.display = "none";
+  document.getElementById("botaoVoltar").style.display = "block";
   quadro.style.display = "grid";
   criarquadro();
   listenBoard();
@@ -155,12 +156,13 @@ function verificaEstado() {
     document.body.appendChild(mensagem);
 
     bloquearCaixas();
-    setTimeout(() => window.location.reload(), 5000);
-    return true; // termina aqui se venceu
+    quadro.removeEventListener('click', comecarJogo); // ⬅️ impede novos cliques
+    return true;
   }
 
-  return false; // não troca turno aqui
+  return false;
 }
+
 
 
 function getCaixas() {
@@ -201,5 +203,15 @@ function desbloquearCaixas() {
   });
 }
 function mostrarDificuldades() {
-    document.getElementById("botoes-dificuldade").style.display = "block";
+  const botoes = document.getElementById("botoes-dificuldade");
+  if (botoes.style.display === "block") {
+    botoes.style.display = "none";
+  } else {
+    botoes.style.display = "block";
+  }
+}
+
+function voltarMenu() {
+  location.reload();
+
 }

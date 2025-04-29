@@ -3,7 +3,7 @@ body {
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
-    background-image:url(https://png.pngtree.com/png-vector/20240405/ourmid/pngtree-old-women-sitting-on-sofa-with-tea-png-image_12265025.png);
+    
   }
   
   h1 {
@@ -63,11 +63,14 @@ body {
     border: 3px solid #1B7F7A;
     box-shadow: 5px -5px 0px rgb(194, 255, 176);
     margin-left: 20px;
+    border-radius: 10px;
   }
   
   .modernB:hover {
     box-shadow: -10px 10px 0px  lightsteelblue;
-    border: 4px solid #1B7F7A
+    border: 4px solid #1B7F7A;
+    background-image: linear-gradient(to right, #0897b4af, rgba(173, 216, 230, 0.76));
+    
   }
 
   #menu {
@@ -87,4 +90,9 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
+
+  #botaoVoltar {
+    display: none;
+    text-align: center;
+    margin-top: 50px;
+  }
