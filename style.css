@@ -1,6 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
     font-family: "Gloria Hallelujah", cursive;
-    background-color: #f2f2f2;
+    background-color: #A9D4D9;
     margin: 0;
     padding: 0;
     
@@ -8,17 +14,19 @@ body {
   
   h1 {
     text-align: center;
+    justify-content: flex-start;
     margin-top: 20px;
+
   }
   
   .caixa {
-    background-color: darkgrey;
+    background-color: #80ADBF;
     text-align: center;
     width: 75px;
     height: 75px;
     font-weight: bold;
     font-size: 40px;
-    box-shadow: 5px 5px 5px black;
+    box-shadow: 10px 10px 10px black;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -74,16 +82,13 @@ body {
   }
 
   #menu {
+    padding: 0px;
     width: 600px;
     height: 600px;
-    background-color: rgb(255, 255, 234);
+    background-color: #80adbf83;
     border-radius: 30px;
 
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    
   
     position: absolute;
     top: 50%;
@@ -95,4 +100,31 @@ body {
     display: none;
     text-align: center;
     margin-top: 50px;
+  }
+
+  #coisas {
+    padding: 0px;
+    width: 600px;
+    height: 600px;
+    background-color: #80adbf83;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    
+  }
+
+  #imagem_menu {
+    margin:0;
+    position:relative;
+    height: 100px;
+    width: 100px;
   }
