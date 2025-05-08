@@ -1,4 +1,6 @@
 const quadro = document.querySelector('.game-container');
+let vitoriasX = 0;
+let vitoriasO = 0;
 let turn = "X";
 let contraIA = true;
 let dificuldadeIA = "dificil"; // "facil" ou "dificil"
@@ -8,9 +10,14 @@ function iniciarJogo(usandoIA, dificuldade = "dificil") {
   dificuldadeIA = dificuldade;
   document.getElementById("menu").style.display = "none";
   document.getElementById("botaoVoltar").style.display = "block";
+  document.getElementById("botaoReiniciar").style.display = "none";
+  document.getElementById("titulo").style.display = "block";
+
   quadro.style.display = "grid";
   criarquadro();
   listenBoard();
+  document.getElementById("placar").style.display = "flex";
+  atualizarPlacar();
 }
 
 function listenBoard() {
@@ -150,21 +157,29 @@ function verificaEstado() {
   if (vencedor) {
     const mensagem = document.createElement('p');
     mensagem.textContent = vencedor === "empate" ? "Empate!" : `O jogador ${vencedor} venceu!`;
-    mensagem.style.fontSize = '24px';
+    mensagem.id = "mensagem-vencedor";
+    mensagem.classList.add("texto-animado"); // aplica a animação
+    mensagem.style.fontSize = '100px';
     mensagem.style.textAlign = 'center';
-    mensagem.style.marginTop = '50px';
+    mensagem.style.marginTop = '-3000px';
     document.body.appendChild(mensagem);
 
+    // Atualiza o placar
+    if (vencedor === "X") {
+      vitoriasX++;
+    } else if (vencedor === "O") {
+      vitoriasO++;
+    }
+    document.getElementById("botaoReiniciar").style.display = "block";
+    atualizarPlacar();
     bloquearCaixas();
-    quadro.removeEventListener('click', comecarJogo); // ⬅️ impede novos cliques
+    quadro.removeEventListener('click', comecarJogo);
     return true;
   }
 
   return false;
 }
-
-
-
+  
 function getCaixas() {
   const conteudo = [];
   for (let i = 0; i <= 8; i++) {
@@ -214,4 +229,33 @@ function mostrarDificuldades() {
 function voltarMenu() {
   location.reload();
 
+}
+
+function atualizarPlacar() {
+  const esquerda = document.getElementById("contador-esquerda");
+  const direita = document.getElementById("contador-direita");
+
+  if (contraIA) {
+    esquerda.textContent = "Jogador (X): " + vitoriasX;
+    direita.textContent = "IA: " + vitoriasO;
+  } else {
+    esquerda.textContent = "Jogador 1: " + vitoriasX;
+    direita.textContent = "Jogador 2: " + vitoriasO;
+  }
+}
+
+
+function reiniciarJogo() {
+  // Limpa o tabuleiro atual
+  quadro.innerHTML = "";
+  document.getElementById("botaoReiniciar").style.display = "none";
+  const mensagemAnterior = document.getElementById("mensagem-vencedor");
+  if (mensagemAnterior) {
+    mensagemAnterior.remove();
+  }
+  // Reinicia o turno
+  turn = "X";
+  // Cria novamente o tabuleiro e ativa o jogo
+  criarquadro();
+  listenBoard();
 }

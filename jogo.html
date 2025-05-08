@@ -20,7 +20,7 @@
       />
       <p style="text-align: center; font-size: 20px;">Escolha o modo de jogo:</p>
   
-      <div class="botao-container" style="text-align: center;">
+      <div class="botao-container" style="text-align: center;"> 
         <button class="input modernB" onclick="iniciarJogo(false)">2 Jogadores</button>
         <button class="input modernB" onclick="mostrarDificuldades()">Contra IA</button>
       </div>
@@ -34,7 +34,15 @@
   </div>
   
   
+  <div id="placar" style="display: none; justify-content: space-between; width: 600px; margin: 0 auto; font-weight: bold; font-size: 20px;">
+    <div class="postIt1" id="contador-esquerda">Jogador 1: 0</div>
+    <div class="postIt2" id="contador-direita" onclick="">Jogador 2: 0</div>
+  </div>
+  
 
+  <div id="titulo" style="display: none;">
+    <h1>JOGO DA VELHA</h1>
+  </div>
 
   <div class="jogo" >
     <div class="game-container" style="display: none;"></div>
@@ -44,16 +52,13 @@
     </div>
   </div>
   
-<!--<div class="game-container" style="display: none;"></div>
-
-  <div id="botaoVoltar" style="display: none; text-align: center; margin-top: 20px;">
-    <button class="input modernB" onclick="voltarMenu()">Voltar</button>
-  </div>-->
-
-  <h1 class="vencedor"></h1>
+  <div id="botaoReiniciar" style="text-align: center; margin-top: 10px; display: none;">
+    <button class="input modernB" id="jogar de novo" onclick="reiniciarJogo()">Jogar Novamente</button>
+  </div>
+  
+  <h1 class="vencedor" style="text-align: center; margin-top: 20px;"></h1>
 
   <script src="script.js"></script>
- 
-  </script>
+
 </body>
 </html>
