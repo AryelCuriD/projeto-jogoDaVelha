@@ -36,6 +36,7 @@ body {
   .caixa:hover {
     width: 76px;
     height: 76px;
+    background-color: #80adbfd5;
   }
   
   .game-container {
@@ -124,7 +125,7 @@ body {
 
   #botaoReiniciar {
     position: absolute;
-    bottom: 40%;
+    bottom: 30%;
     left: 50%;
     transform: translateX(-50%);
   }
