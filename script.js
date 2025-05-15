@@ -1,18 +1,17 @@
-// Seleciona o elemento que representa o quadro do jogo
 const quadro = document.querySelector('.game-container');
 
-// Contadores de vitórias
+
 let vitoriasX = 0;
 let vitoriasO = 0;
 
-// Turno atual ("X" começa)
+
 let turn = "X";
 
-// Flags para saber se está jogando contra IA e qual a dificuldade
-let contraIA = true;
-let dificuldadeIA = "dificil"; // "facil" ou "dificil"
 
-// Inicia o jogo, configurando o modo (IA ou 2 jogadores)
+let contraIA = true;
+let dificuldadeIA = "dificil";
+
+
 function iniciarJogo(usandoIA, dificuldade = "dificil") {
   contraIA = usandoIA;
   dificuldadeIA = dificuldade;
@@ -28,12 +27,12 @@ function iniciarJogo(usandoIA, dificuldade = "dificil") {
   atualizarPlacar();
 }
 
-// Adiciona o ouvinte de eventos ao tabuleiro
+
 function listenBoard() {
   quadro.addEventListener('click', comecarJogo);
 }
 
-// Lida com o clique em uma célula do jogo
+
 function comecarJogo(e) {
   const idCaixa = e.target.id;
   if (!idCaixa || !idCaixa.startsWith("caixa-")) return;
@@ -62,15 +61,15 @@ function comecarJogo(e) {
   }
 }
 
-// IA faz uma jogada baseada na dificuldade
+
 function iaJoga() {
   const caixas = getCaixas();
   let jogada = -1;
 
   if (dificuldadeIA === "dificil") {
-    jogada = melhorJogada(caixas); // Usa algoritmo minimax
+    jogada = melhorJogada(caixas);
   } else {
-    jogada = jogadaAleatoria(caixas); // Escolhe uma jogada aleatória
+    jogada = jogadaAleatoria(caixas);
   }
 
   if (jogada !== -1) {
@@ -88,7 +87,7 @@ function jogadaAleatoria(board) {
   return jogadasPossiveis[indice];
 }
 
-// IA difícil: usa algoritmo minimax para jogar
+
 function melhorJogada(board) {
   let melhorScore = -Infinity;
   let jogada = -1;
@@ -141,7 +140,7 @@ function minimax(board, profundidade, isMaximizando) {
   }
 }
 
-// Verifica se há um vencedor ou empate
+
 function getWinner(board) {
   const combs = [
     [0,1,2],[3,4,5],[6,7,8],
@@ -159,7 +158,7 @@ function getWinner(board) {
   return null;
 }
 
-// Verifica o estado atual do jogo (vitória ou empate)
+
 function verificaEstado() {
   const caixas = getCaixas();
   const vencedor = getWinner(caixas);
@@ -169,12 +168,19 @@ function verificaEstado() {
     mensagem.textContent = vencedor === "empate" ? "Empate!" : `O jogador ${vencedor} venceu!`;
     mensagem.id = "mensagem-vencedor";
     mensagem.classList.add("texto-animado");
-    mensagem.style.fontSize = '100px';
+    mensagem.style.position = 'fixed';
+    mensagem.style.top = '50%';
+    mensagem.style.left = '20%';
+    mensagem.style.transform = 'translate(-50%, -50%)';
+    mensagem.style.fontSize = 'clamp(2rem, 8vw, 5rem)';
     mensagem.style.textAlign = 'center';
-    mensagem.style.marginTop = '-3000px';
+    mensagem.style.color = 'green';
+    mensagem.style.zIndex = '1000';
+    mensagem.style.pointerEvents = 'none';
+    
     document.body.appendChild(mensagem);
 
-    // Atualiza o placar
+
     if (vencedor === "X") {
       vitoriasX++;
     } else if (vencedor === "O") {
@@ -191,7 +197,7 @@ function verificaEstado() {
   return false;
 }
 
-// Retorna um array com o conteúdo de cada caixa
+
 function getCaixas() {
   const conteudo = [];
   for (let i = 0; i <= 8; i++) {
@@ -201,12 +207,12 @@ function getCaixas() {
   return conteudo;
 }
 
-// Troca o turno entre os jogadores
+
 function switchPlayer() {
   turn = turn === "X" ? "O" : "X";
 }
 
-// Cria o tabuleiro com 9 caixas
+
 function criarquadro() {
   for (let i = 0; i < 9; i++) {
     const caixa = document.createElement("div");
@@ -216,7 +222,6 @@ function criarquadro() {
   }
 }
 
-// Impede que as caixas sejam clicadas
 function bloquearCaixas() {
   const caixas = document.querySelectorAll('.caixa');
   caixas.forEach(caixa => {
@@ -226,7 +231,6 @@ function bloquearCaixas() {
   });
 }
 
-// Libera as caixas para novos cliques
 function desbloquearCaixas() {
   const caixas = document.querySelectorAll('.caixa');
   caixas.forEach(caixa => {
@@ -234,7 +238,6 @@ function desbloquearCaixas() {
   });
 }
 
-// Exibe ou esconde os botões de dificuldade no menu
 function mostrarDificuldades() {
   const botoes = document.getElementById("botoes-dificuldade");
   if (botoes.style.display === "block") {
@@ -244,12 +247,10 @@ function mostrarDificuldades() {
   }
 }
 
-// Volta para o menu principal recarregando a página
 function voltarMenu() {
   location.reload();
 }
 
-// Atualiza o placar na tela de acordo com o modo de jogo
 function atualizarPlacar() {
   const esquerda = document.getElementById("contador-esquerda");
   const direita = document.getElementById("contador-direita");
@@ -263,12 +264,11 @@ function atualizarPlacar() {
   }
 }
 
-// Reinicia o jogo atual sem resetar o placar
 function reiniciarJogo() {
   quadro.innerHTML = "";
   document.getElementById("botaoReiniciar").style.display = "none";
 
-  // Remove mensagem de vitória
+
   const mensagemAnterior = document.getElementById("mensagem-vencedor");
   if (mensagemAnterior) {
     mensagemAnterior.remove();
